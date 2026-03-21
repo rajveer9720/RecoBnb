@@ -1,0 +1,665 @@
+/* ============================================================
+   NEXAGON — Enhanced UI Stylesheet
+   All dynamic/brand colors come from inline styles (env vars).
+   This file adds depth, spacing, and polish on top of App.css.
+   ============================================================ */
+
+/* ── Smooth Scroll ── */
+html {
+  scroll-behavior: smooth;
+}
+
+/* ── Custom Scrollbar ── */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: #0a0a0f; }
+::-webkit-scrollbar-thumb { background: rgba(139,92,246,0.4); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: rgba(139,92,246,0.7); }
+
+/* ============================================================
+   NAVIGATION
+   ============================================================ */
+.navbar {
+  backdrop-filter: blur(20px) saturate(180%) !important;
+  -webkit-backdrop-filter: blur(20px) saturate(180%) !important;
+  border-bottom: 1px solid rgba(255,255,255,0.07) !important;
+  padding: 0.6rem 0 !important;
+  transition: background 0.3s ease;
+}
+
+.navbar .nav-link {
+  font-size: 0.875rem !important;
+  font-weight: 500 !important;
+  letter-spacing: 0.02em;
+  padding: 0.5rem 0.75rem !important;
+  border-radius: 8px;
+  transition: background 0.2s ease, color 0.2s ease !important;
+  position: relative;
+}
+
+.navbar .nav-link:hover {
+  background: rgba(255,255,255,0.07) !important;
+}
+
+.navbar-toggler {
+  border: 1px solid rgba(255,255,255,0.15) !important;
+  border-radius: 8px !important;
+}
+.navbar-toggler:focus { box-shadow: none !important; }
+
+/* ============================================================
+   SECTION HEADINGS — shared across all sections
+   ============================================================ */
+.dashboard-title,
+.plans-title,
+.referral-title,
+.leadership-title,
+.faq-title {
+  font-size: clamp(1.75rem, 4vw, 2.5rem) !important;
+  font-weight: 800 !important;
+  letter-spacing: -0.02em;
+  line-height: 1.15 !important;
+}
+
+.dashboard-subtitle,
+.plans-subtitle,
+.referral-subtitle,
+.leadership-subtitle,
+.faq-subtitle {
+  font-size: 1rem !important;
+  opacity: 0.7;
+  max-width: 480px;
+  margin: 0 auto;
+  line-height: 1.6;
+}
+
+
+.hero-title {
+  font-size: clamp(2.4rem, 5vw, 4.2rem) !important;
+  font-weight: 800 !important;
+  letter-spacing: -0.03em !important;
+  line-height: 1.08 !important;
+}
+
+.hero-subtitle {
+  font-size: 1.05rem !important;
+  line-height: 1.75 !important;
+  opacity: 0.75;
+}
+
+.hero-btn {
+  border-radius: 10px !important;
+  font-size: 0.9rem !important;
+  font-weight: 600 !important;
+  padding: 0.75rem 1.5rem !important;
+  transition: filter 0.2s ease, transform 0.2s ease !important;
+  letter-spacing: 0.02em;
+}
+
+.hero-btn:hover {
+  filter: brightness(1.15);
+  transform: translateY(-1px);
+}
+
+/* Contract Stats Card */
+.contract-stats-card {
+  border: 1px solid rgba(255,255,255,0.08) !important;
+  border-radius: 20px !important;
+  padding: 1.75rem !important;
+  box-shadow: 0 8px 40px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.06) !important;
+  backdrop-filter: blur(20px) !important;
+}
+
+.stats-header {
+  margin-bottom: 1.25rem !important;
+}
+
+.stats-header h3 {
+  font-size: 1.1rem !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.01em;
+}
+
+.live-indicator {
+  font-size: 0.72rem !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.08em;
+  padding: 0.3rem 0.65rem;
+  border-radius: 20px;
+  background: rgba(255,255,255,0.05);
+}
+
+.stats-list { gap: 0 !important; }
+
+.stat-row {
+  padding: 0.7rem 0;
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+  transition: background 0.15s ease;
+  padding-left: 0.25rem;
+  padding-right: 0.25rem;
+  border-radius: 6px;
+}
+.stat-row:last-child { border-bottom: none; }
+.stat-row:hover { background: rgba(255,255,255,0.03); }
+
+.stat-row .stat-label {
+  font-size: 0.82rem !important;
+  font-weight: 400;
+}
+
+.stat-row .stat-value {
+  font-size: 0.88rem !important;
+  font-weight: 700 !important;
+}
+
+
+
+
+.plans-grid.side-by-side {
+  gap: 1.5rem !important;
+  margin-top: 2.5rem !important;
+}
+
+.plan-card {
+  border-radius: 20px !important;
+
+  transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease !important;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  overflow: hidden;
+  position: relative;
+}
+
+.plan-card::before {
+  content: "";
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  opacity: 0.8;
+}
+
+
+
+.plan-card:hover {
+  transform: translateY(-4px) !important;
+
+}
+
+/* Investment Amount label */
+.plan-card .input-group label {
+  font-size: 0.75rem !important;
+  font-weight: 600 !important;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  opacity: 0.7;
+  margin-bottom: 0.5rem !important;
+  display: block;
+}
+
+/* Investment amount input */
+.plan-card input[type="number"] {
+  border-radius: 10px !important;
+  padding: 0.75rem 1rem !important;
+  font-size: 1rem !important;
+  font-weight: 600 !important;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease !important;
+  width: 100%;
+}
+
+.plan-card input[type="number"]:focus {
+  outline: none;
+
+}
+
+.plan-card input[type="number"]::placeholder {
+  opacity: 0.4;
+  font-size: 0.85rem;
+  font-weight: 400;
+}
+
+/* Plan detail rows */
+.plan-card .status-card {
+  border-radius: 12px !important;
+  border: 1px solid rgba(255,255,255,0.05) !important;
+  background: transparent !important;
+  padding: 0 !important;
+}
+
+.detail-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.65rem 0.75rem;
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+  border-radius: 0;
+}
+.detail-row:last-child { border-bottom: none; }
+
+.detail-row span:first-child {
+  font-size: 0.82rem;
+  font-weight: 400;
+}
+
+.detail-row span:last-child {
+  font-size: 0.88rem;
+  font-weight: 700;
+}
+
+/* Invest button */
+.select-plan-btn {
+  border-radius: 12px !important;
+  font-size: 0.9rem !important;
+  font-weight: 700 !important;
+  padding: 0.85rem 1.25rem !important;
+  letter-spacing: 0.04em;
+  transition: filter 0.2s ease, transform 0.2s ease !important;
+  cursor: pointer;
+}
+
+.select-plan-btn:not(:disabled):hover {
+  filter: brightness(1.15);
+  transform: translateY(-1px);
+}
+
+/* ============================================================
+   INVESTMENT DASHBOARD
+   ============================================================ */
+.dashboard-section {
+  min-height: auto !important;
+}
+
+.dashboard-cards-container {
+  gap: 1.5rem !important;
+  align-items: stretch;
+}
+
+/* Card 1 — Left card */
+.dashboard-card {
+  border-radius: 20px !important;
+  border: 1px solid rgba(255,255,255,0.07) !important;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.35) !important;
+  padding: 1.75rem !important;
+}
+
+/* Balance cards */
+.balance-card {
+  border: 1px solid rgba(255,255,255,0.06) !important;
+  border-radius: 14px !important;
+  padding: 1.25rem 1.5rem !important;
+  transition: border-color 0.2s ease;
+  gap: 1rem !important;
+}
+.balance-card:hover { border-color: rgba(139,92,246,0.25) !important; }
+
+.balance-icon {
+  font-size: 1.75rem !important;
+  width: 44px; height: 44px;
+  display: flex; align-items: center; justify-content: center;
+  background: rgba(139,92,246,0.12);
+  border-radius: 12px;
+  flex-shrink: 0;
+}
+
+.balance-amount {
+  font-size: 1.25rem !important;
+  font-weight: 800 !important;
+  letter-spacing: -0.01em;
+}
+
+.balance-label {
+  font-size: 0.72rem !important;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  opacity: 0.55;
+}
+
+/* Withdraw action buttons */
+.action-btn {
+  border-radius: 10px !important;
+  font-size: 0.82rem !important;
+  font-weight: 600 !important;
+  padding: 0.65rem 1rem !important;
+  letter-spacing: 0.02em;
+  border: 1px solid rgba(255,255,255,0.1) !important;
+  transition: filter 0.2s ease, transform 0.2s ease, border-color 0.2s ease !important;
+  white-space: nowrap;
+}
+
+.action-btn:not(:disabled):hover {
+  filter: brightness(1.15) !important;
+  transform: translateY(-1px);
+  border-color: rgba(255,255,255,0.2) !important;
+}
+
+/* Right card — Status items (already styled via previous task) */
+.status-card {
+  border: 1px solid rgba(255,255,255,0.05) !important;
+  border-radius: 14px !important;
+  padding: 1rem 1.25rem !important;
+}
+
+.status-item {
+  gap: 0.75rem !important;
+  padding: 0.8rem 0 !important;
+}
+
+.status-label {
+  font-size: 0.82rem !important;
+  letter-spacing: 0.01em;
+}
+
+.status-value {
+  font-size: 0.88rem !important;
+  font-weight: 700 !important;
+  letter-spacing: -0.01em;
+}
+
+/* ============================================================
+   LEADERSHIP PROGRAM
+   ============================================================ */
+
+.leadership-stat-card {
+  border-radius: 18px !important;
+  border: 1px solid rgba(255,255,255,0.07) !important;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.3) !important;
+  padding: 1.75rem !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  text-align: center !important;
+  gap: 0.75rem !important;
+  transition: transform 0.25s ease, border-color 0.25s ease !important;
+  min-height: 160px !important;
+  justify-content: center;
+}
+
+.leadership-stat-card:hover {
+  transform: translateY(-3px) !important;
+  border-color: rgba(139,92,246,0.3) !important;
+}
+
+.leadership-stat-card .stat-icon {
+  font-size: 2rem !important;
+  width: 56px; height: 56px;
+  display: flex; align-items: center; justify-content: center;
+  background: rgba(139,92,246,0.12);
+  border-radius: 16px;
+}
+
+.leadership-stat-card .stat-info {
+  display: flex;
+  flex-direction: column-reverse; /* value on top, label below */
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.leadership-stat-card .stat-amount {
+  font-size: 0.78rem !important;
+  font-weight: 600 !important;
+  opacity: 0.6;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  margin: 0 !important;
+}
+
+.leadership-stat-card .stat-label {
+  font-size: 1.5rem !important;
+  font-weight: 800 !important;
+  opacity: 1;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+}
+
+
+.referral-link-section {
+  border-radius: 20px !important;
+  border: 1px solid rgba(255,255,255,0.07) !important;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.35) !important;
+  padding: 2rem !important;
+  width: 100% !important;
+  max-width: 700px !important;
+  margin: 0 auto 3rem auto !important;
+}
+
+.referral-link-title {
+  font-size: 1.1rem !important;
+  font-weight: 700 !important;
+  margin-bottom: 0.25rem !important;
+}
+
+.referral-link-subtitle {
+  font-size: 0.85rem !important;
+  opacity: 0.6;
+  margin-bottom: 1.25rem !important;
+}
+
+.referral-link-input {
+  border: 1px solid rgba(255,255,255,0.08) !important;
+  border-radius: 10px !important;
+  padding: 0.75rem 1rem !important;
+  font-size: 0.83rem !important;
+  background: rgba(255,255,255,0.04) !important;
+  transition: border-color 0.2s ease !important;
+}
+
+.referral-link-input:focus {
+  outline: none;
+  border-color: rgba(139,92,246,0.4) !important;
+}
+
+.copy-btn {
+  border-radius: 10px !important;
+  font-size: 0.85rem !important;
+  font-weight: 700 !important;
+  padding: 0.75rem 1.25rem !important;
+  letter-spacing: 0.02em;
+  border: 1px solid rgba(255,255,255,0.1) !important;
+  white-space: nowrap;
+  transition: filter 0.2s ease, transform 0.2s ease !important;
+}
+
+.copy-btn:hover {
+  filter: brightness(1.2) !important;
+  transform: translateY(-1px);
+}
+
+/* Commission Structure */
+.commission-levels { margin-top: 0 !important; }
+
+.commission-title {
+  font-size: 1.4rem !important;
+  font-weight: 700 !important;
+  margin-bottom: 1.5rem !important;
+  letter-spacing: -0.01em;
+}
+
+
+
+.commission-card {
+  border-radius: 14px !important;
+  border: 1px solid rgba(255,255,255,0.07) !important;
+  padding: 1rem 0.75rem !important;
+  text-align: center;
+  transition: transform 0.2s ease, border-color 0.2s ease !important;
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.commission-card:hover {
+  transform: translateY(-2px);
+  border-color: rgba(139,92,246,0.3) !important;
+}
+
+.commission-level {
+  font-size: 1rem !important;
+  font-weight: 600 !important;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  opacity: 0.55;
+  display: flex !important;
+  align-items: center !important;
+  gap: 0.35rem !important;
+  margin-bottom: 0 !important;
+}
+
+/* Level number badge */
+.commission-level > span:last-child {
+  background: rgba(139,92,246,0.2);
+  color: #a78bfa;
+  border-radius: 4px;
+  padding: 0.05rem 0.35rem;
+  font-size: 1rem;
+  font-weight: 800;
+}
+
+.commission-percentage {
+  font-size: 1.6rem !important;
+  font-weight: 800 !important;
+  letter-spacing: -0.02em !important;
+  margin: 0 !important;
+  line-height: 1.1;
+}
+
+.commission-label {
+  font-size: 0.68rem !important;
+  opacity: 0.5;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+/* ============================================================
+   FAQ
+   ============================================================ */
+
+.faq-list { max-width: 750px !important; }
+
+.faq-item {
+  border-radius: 14px !important;
+  border: 1px solid rgba(255,255,255,0.07) !important;
+  margin-bottom: 0.65rem !important;
+  overflow: hidden;
+  transition: border-color 0.2s ease;
+}
+
+.faq-item.open {
+  border-color: rgba(139,92,246,0.25) !important;
+}
+
+.faq-question {
+  padding: 1.1rem 1.4rem !important;
+  font-size: 0.9rem !important;
+  font-weight: 500 !important;
+  letter-spacing: 0.01em;
+  line-height: 1.5;
+  gap: 1rem;
+}
+
+.faq-icon {
+  font-size: 1rem !important;
+  font-weight: 700 !important;
+  flex-shrink: 0;
+  width: 24px; height: 24px;
+  display: flex; align-items: center; justify-content: center;
+  background: rgba(139,92,246,0.12);
+  border-radius: 6px;
+  transition: transform 0.3s ease, background 0.2s ease !important;
+}
+
+.faq-item.open .faq-icon {
+  background: rgba(139,92,246,0.25);
+  transform: rotate(0deg) !important;
+}
+
+.faq-answer {
+  padding: 0 1.4rem 1.2rem !important;
+  font-size: 0.88rem !important;
+  line-height: 1.7 !important;
+  opacity: 0.75;
+  border-top: 1px solid rgba(255,255,255,0.05);
+  padding-top: 0.9rem !important;
+}
+
+/* ============================================================
+   FOOTER
+   ============================================================ */
+
+
+.footer-content {
+  gap: 1rem !important;
+}
+
+.footer-description p {
+  font-size: 0.85rem !important;
+  line-height: 1.75 !important;
+  max-width: 480px;
+  margin: 0 auto;
+  opacity: 0.6;
+}
+
+
+
+/* ============================================================
+   RESPONSIVE OVERRIDES
+   ============================================================ */
+@media (max-width: 768px) {
+  .leadership-stat-card {
+    flex-direction: row !important;
+    text-align: left !important;
+    align-items: center !important;
+    min-height: auto !important;
+    padding: 1.25rem !important;
+  }
+
+  .leadership-stat-card .stat-info {
+    flex-direction: row !important;
+    align-items: baseline;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+  }
+
+  .leadership-stat-card .stat-label {
+    font-size: 1.2rem !important;
+  }
+
+
+
+  .commission-percentage {
+    font-size: 1.3rem !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .dashboard-card {
+    padding: 1.25rem !important;
+    border-radius: 16px !important;
+  }
+
+  .balance-card {
+    padding: 1rem !important;
+  }
+
+
+  .commission-card {
+    padding: 0.75rem 0.5rem !important;
+    border-radius: 10px !important;
+  }
+
+  .commission-percentage {
+    font-size: 1.1rem !important;
+  }
+
+  .faq-question {
+    padding: 0.9rem 1rem !important;
+    font-size: 0.85rem !important;
+  }
+
+  .faq-answer {
+    padding: 0 1rem 1rem !important;
+    padding-top: 0.75rem !important;
+  }
+
+  .hero-btn {
+    padding: 0.7rem 1.2rem !important;
+    font-size: 0.85rem !important;
+  }
+}
