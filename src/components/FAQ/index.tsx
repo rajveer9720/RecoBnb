@@ -16,17 +16,17 @@ const FAQ: React.FC = () => {
     {
       question: "How does the Investment process work?",
       answer:
-        "Our investment process is simple and secure. You deposit funds into your chosen plan, and we use advanced trading algorithms to generate returns. All investments are processed within 24 hours.",
+        "Our investment process is simple and secure. You connect your wallet, choose from three investment plans (Gold, Platinum, Diamond), and deposit BNB/ETH into your chosen plan. Smart contract algorithms generate returns automatically. All investments are processed instantly on the blockchain.",
     },
     {
       question: "What are the Minimum and maximum Investment amounts?",
       answer:
-        "Minimum investment varies by plan: Gold Plan ($50), Platinum Plan ($500), Diamond Plan ($2000). Maximum investment limits are set based on your account tier and verification level.",
+        "Minimum investment varies by plan: Plan 1 (0.02 BNB), Plan 2 (0.1 BNB), Plan 3 (1 BNB). Maximum investment limits are: Plan 1 (100 BNB), Plan 2 (1000 BNB), Plan 3 (Unlimited). These amounts are dynamically loaded from the smart contract.",
     },
     {
       question: "How are daily returns calculated?",
       answer:
-        "Daily returns are calculated based on your plan's rate and your total investment amount. Returns are automatically credited to your account every 24 hours.",
+        "Daily returns are calculated automatically by smart contracts based on your plan's ROI rate: Gold Plan (1.30% daily), Platinum Plan (0.90% daily), Diamond Plan (0.70% daily). Returns are calculated based on your investment amount and can be withdrawn after the cooldown period.",
     },
     {
       question: "How does the referral program work?",
@@ -41,7 +41,7 @@ const FAQ: React.FC = () => {
     {
       question: "Is there a withdrawal fee?",
       answer:
-        "Withdrawal fees vary by payment method. Most withdrawals have a small processing fee to cover transaction costs.",
+        "Withdrawals require standard blockchain gas fees for transaction processing. The smart contract may apply minimal network fees. Check the current network fees in your wallet before withdrawing.",
     },
     {
       question: `How secure is ${AppTitle}?`,
@@ -82,7 +82,7 @@ const FAQ: React.FC = () => {
             Frequently Asked Questions
           </h2>
           <p className="faq-subtitle" style={{ color: mutedTextColor }}>
-            Find Answers to common questions about Hexagon
+            Find Answers to common questions about RecoBnb
           </p>
         </div>
 

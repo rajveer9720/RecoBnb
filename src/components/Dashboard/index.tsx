@@ -158,8 +158,8 @@ const Dashboard: React.FC = () => {
       return;
     }
 
-    if (parseFloat(userData.referralBonus) === 0) {
-      showFailedAlert("No referral bonus available to withdraw.");
+    if (parseFloat(userData.referralBonus) === 0 && parseFloat(userData.poolBonus || "0") === 0) {
+      showFailedAlert("No referral or pool bonus available to withdraw.");
       return;
     }
 
@@ -188,7 +188,7 @@ const Dashboard: React.FC = () => {
       <div className="dashboard-container">
         <div className="dashboard-header">
           <h2 className="dashboard-title" style={{ color: textColor }}>
-            Investment Dashboard
+            User Dashboard
           </h2>
           <p className="dashboard-subtitle" style={{ color: mutedTextColor }}>
             Track your ROI performance and optimize your DeFi strategy
@@ -371,18 +371,36 @@ const Dashboard: React.FC = () => {
                   </div>
                   <div className="status-item">
                     <span className="status-dot status-dot-blue" />
-                    <span className="status-label">Referral Newest Withdrawn</span>
+                    <span className="status-label">Referral Withdrawn</span>
                     <span className="status-value">
                       {userData?.referralBonusWithdrawn || "0"} {symbol}
                     </span>
                   </div>
                   <div className="status-item">
                     <span className="status-dot status-dot-pink" />
-                    <span className="status-label">Leadership Bonus Minimum</span>
+                    <span className="status-label">Leadership Withdrawn</span>
                     <span className="status-value">
                       {userData?.leadershipBonusWithdrawn || "0"} {symbol}
                     </span>
                   </div>
+                  {userData?.isInPool && (
+                    <>
+                      <div className="status-item">
+                        <span className="status-dot" style={{ backgroundColor: "#f97316" }} />
+                        <span className="status-label">Pool Bonus Available</span>
+                        <span className="status-value">
+                          {userData?.poolBonus || "0"} {symbol}
+                        </span>
+                      </div>
+                      <div className="status-item">
+                        <span className="status-dot" style={{ backgroundColor: "#06b6d4" }} />
+                        <span className="status-label">Pool Bonus Withdrawn</span>
+                        <span className="status-value">
+                          {userData?.poolBonusWithdrawn || "0"} {symbol}
+                        </span>
+                      </div>
+                    </>
+                  )}
                 </div>
               </div>
             </div>

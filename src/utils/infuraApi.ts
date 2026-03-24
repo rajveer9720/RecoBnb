@@ -124,9 +124,9 @@ export const fetchUserData = async (
         referralBonusWithdrawn,
         leadershipBonus,
         leadershipBonusWithdrawn,
+        poolBonusRaw,
+        poolBonusWithdrawnRaw,
         referrer,
-        referralLevels,
-        leadershipLevels,
         directReferrals,
       ] = await contract.getUserInfo(userAddress);
       const [
@@ -138,8 +138,10 @@ export const fetchUserData = async (
         actives,
         pendingRewards,
       ] = await contract.getUserInvestments(userAddress);
+      const [isInPool] = await contract.getPoolInfo(userAddress);
+      const [referralLevelsRaw, leadershipLevelsRaw] = await contract.getUserLevels(userAddress);
       const actualReferralCounts = await getReferralsCountByLevel(userAddress);
-      const safeLeadershipLevels = Array.from(leadershipLevels).map(
+      const safeLeadershipLevels = Array.from(leadershipLevelsRaw as any[]).map(
         (level: any) => level.toString(),
       );
       return {
@@ -150,9 +152,12 @@ export const fetchUserData = async (
         referralBonusWithdrawn: formatFromWei(referralBonusWithdrawn),
         leadershipBonus: formatFromWei(leadershipBonus),
         leadershipBonusWithdrawn: formatFromWei(leadershipBonusWithdrawn),
+        poolBonus: formatFromWei(poolBonusRaw),
+        poolBonusWithdrawn: formatFromWei(poolBonusWithdrawnRaw),
+        isInPool: Boolean(isInPool),
         referrer,
         referralLevels: actualReferralCounts,
-        referralLevelsAmounts: referralLevels,
+        referralLevelsAmounts: Array.from(referralLevelsRaw as any[]).map((v: any) => v.toString()),
         leadershipLevels: safeLeadershipLevels,
         directReferrals: directReferrals.toString(),
         planIds: planIds.map((id: any) => id.toString()),

@@ -1,5 +1,7 @@
 import { useContractData } from "../Context/ContractDataContext";
 import { getWalletSymbol } from "../../utils/ProviderUtils";
+import presentationPdf from "../../assets/presentation.pdf";
+
 
 const Hero = () => {
   const { contractData } = useContractData();
@@ -12,8 +14,7 @@ const Hero = () => {
   const textColor = import.meta.env.VITE_APP_TEXT_COLOR || "";
   const mutedTextColor = import.meta.env.VITE_APP_MUTED_TEXT_COLOR || "";
   const highlightColor = import.meta.env.VITE_APP_HIGHLIGHT_COLOR || "";
-  const presentationLink = import.meta.env.VITE_APP_PRESENTATION || "#";
-  const smartContractLink = import.meta.env.VITE_APP_SMART_CONTRACT_LINK || "#";
+  const smartContractUrl = import.meta.env.VITE_APP_SMART_CONTRACT_LINK || "";
   return (
     <section className="hero-section ">
       <div className="hero-container py-2">
@@ -33,7 +34,7 @@ const Hero = () => {
                   backgroundColor: buttonBgColor,
                   color: buttonTextColor,
                 }}
-                onClick={() => window.open(smartContractLink, "_blank")}
+                onClick={() => window.open(smartContractUrl, "_blank")}
               >
                 Smart Contract
               </button>
@@ -43,7 +44,7 @@ const Hero = () => {
                   backgroundColor: buttonBgColor,
                   color: buttonTextColor,
                 }}
-                onClick={() => window.open(presentationLink, "_blank")}
+                onClick={() => window.open(presentationPdf, "_blank")}
               >
                 Presentation
               </button>

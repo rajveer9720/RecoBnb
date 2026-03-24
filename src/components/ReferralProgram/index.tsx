@@ -56,13 +56,14 @@ const ReferralProgram: React.FC = () => {
     }
     setTimeout(() => setCopied(false), 2000);
   };
+const levelPercentages = [7, 5, 4, 3, 2, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.4, 0.3, 0.2, 0.1];  
   const commissionLevels = Array.from({ length: 15 }, (_, index) => {
     const level = index + 1;
     const referralCount = userData?.referralLevels?.[index] || "0";
 
     return {
       level: level.toString(),
-      percentage: import.meta.env[`VITE_APP_LEVEL_${level}_PERCENTAGE`] || "",
+      percentage: levelPercentages[index].toString(),
       count: `${referralCount} REFERRALS`,
     };
   });

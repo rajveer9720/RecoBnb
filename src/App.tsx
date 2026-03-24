@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 import Navigation from "./components/Navigation";
 import Hero from "./components/Hero";
 import Dashboard from "./components/Dashboard";
@@ -20,16 +19,6 @@ import { Toaster } from "react-hot-toast";
 
 function AppContent() {
   const { address, isConnected } = useAccount();
-
-  useEffect(() => {
-    document.title = import.meta.env.VITE_APP_TITLE || "";
-    const favicon = document.querySelector(
-      "link[rel*='icon']",
-    ) as HTMLLinkElement;
-    if (favicon) {
-      favicon.href = import.meta.env.VITE_APP_FAVICON || "";
-    }
-  }, []);
 
   const backgroundColor =
     import.meta.env.VITE_APP_BACKGROUND_COLOR || "#1e293b";

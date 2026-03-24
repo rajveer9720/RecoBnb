@@ -6,7 +6,21 @@
         "name": "_projectAddress",
         "type": "address"
       },
-      { "internalType": "address", "name": "_adminAddress", "type": "address" }
+      {
+        "internalType": "address",
+        "name": "_adminAddress",
+        "type": "address"
+      },
+      {
+        "internalType": "address",
+        "name": "_networkAddress",
+        "type": "address"
+      },
+      {
+        "internalType": "uint256",
+        "name": "start",
+        "type": "uint256"
+      }
     ],
     "stateMutability": "nonpayable",
     "type": "constructor"
@@ -65,6 +79,44 @@
       }
     ],
     "name": "NewDeposit",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "amount",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "memberCount",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "timestamp",
+        "type": "uint256"
+      }
+    ],
+    "name": "PoolDistribution",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "internalType": "address",
+        "name": "user",
+        "type": "address"
+      }
+    ],
+    "name": "PoolMemberAdded",
     "type": "event"
   },
   {
@@ -133,6 +185,25 @@
         "type": "uint256"
       }
     ],
+    "name": "WithdrawPool",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "internalType": "address",
+        "name": "user",
+        "type": "address"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "amount",
+        "type": "uint256"
+      }
+    ],
     "name": "WithdrawROI",
     "type": "event"
   },
@@ -158,55 +229,172 @@
   {
     "inputs": [],
     "name": "ADMIN_FEE",
-    "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
     "stateMutability": "view",
     "type": "function"
   },
   {
     "inputs": [],
     "name": "CLAIM_COOLDOWN",
-    "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
     "stateMutability": "view",
     "type": "function"
   },
   {
     "inputs": [],
     "name": "PERCENTS_DIVIDER",
-    "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "PERCENTS_DIVIDER_PLAN",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "PERCENTS_DIVIDER_REFERRAL",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "POOL_DISTRIBUTION_INTERVAL",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "POOL_DISTRIBUTION_PERCENT",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "POOL_ENTRY_WINDOW",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
     "stateMutability": "view",
     "type": "function"
   },
   {
     "inputs": [],
     "name": "PROJECT_FEE",
-    "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
     "stateMutability": "view",
     "type": "function"
   },
   {
     "inputs": [],
     "name": "TIME_STEP",
-    "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
     "stateMutability": "view",
     "type": "function"
   },
   {
     "inputs": [],
     "name": "adminAddress",
-    "outputs": [{ "internalType": "address", "name": "", "type": "address" }],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
-    "name": "allUsers",
-    "outputs": [{ "internalType": "address", "name": "", "type": "address" }],
+    "outputs": [
+      {
+        "internalType": "address",
+        "name": "",
+        "type": "address"
+      }
+    ],
     "stateMutability": "view",
     "type": "function"
   },
   {
     "inputs": [
-      { "internalType": "address", "name": "_user", "type": "address" },
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "name": "allUsers",
+    "outputs": [
+      {
+        "internalType": "address",
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "_user",
+        "type": "address"
+      },
       {
         "internalType": "uint256",
         "name": "_investmentIndex",
@@ -214,24 +402,44 @@
       }
     ],
     "name": "calculateRewards",
-    "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
     "stateMutability": "view",
     "type": "function"
   },
   {
     "inputs": [],
     "name": "getContractBalance",
-    "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
     "stateMutability": "view",
     "type": "function"
   },
   {
     "inputs": [
-      { "internalType": "address", "name": "_user", "type": "address" }
+      {
+        "internalType": "address",
+        "name": "_user",
+        "type": "address"
+      }
     ],
     "name": "getDirectReferrals",
     "outputs": [
-      { "internalType": "address[]", "name": "", "type": "address[]" }
+      {
+        "internalType": "address[]",
+        "name": "",
+        "type": "address[]"
+      }
     ],
     "stateMutability": "view",
     "type": "function"
@@ -240,7 +448,11 @@
     "inputs": [],
     "name": "getLeadershipRates",
     "outputs": [
-      { "internalType": "uint256[3]", "name": "", "type": "uint256[3]" }
+      {
+        "internalType": "uint256[3]",
+        "name": "",
+        "type": "uint256[3]"
+      }
     ],
     "stateMutability": "view",
     "type": "function"
@@ -249,40 +461,107 @@
     "inputs": [],
     "name": "getLeadershipRequirements",
     "outputs": [
-      { "internalType": "uint256[3]", "name": "", "type": "uint256[3]" }
+      {
+        "internalType": "uint256[3]",
+        "name": "",
+        "type": "uint256[3]"
+      }
     ],
     "stateMutability": "view",
     "type": "function"
   },
   {
     "inputs": [
-      { "internalType": "address", "name": "_user", "type": "address" }
+      {
+        "internalType": "address",
+        "name": "_user",
+        "type": "address"
+      }
     ],
     "name": "getNextWithdrawTime",
-    "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
     "stateMutability": "view",
     "type": "function"
   },
   {
     "inputs": [
-      { "internalType": "address", "name": "_user", "type": "address" }
+      {
+        "internalType": "address",
+        "name": "_user",
+        "type": "address"
+      }
+    ],
+    "name": "getPendingPoolBonus",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "_user",
+        "type": "address"
+      }
     ],
     "name": "getPendingRewards",
-    "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
     "stateMutability": "view",
     "type": "function"
   },
   {
     "inputs": [
-      { "internalType": "uint256", "name": "_planId", "type": "uint256" }
+      {
+        "internalType": "uint256",
+        "name": "_planId",
+        "type": "uint256"
+      }
     ],
     "name": "getPlanInfo",
     "outputs": [
-      { "internalType": "uint256", "name": "minDeposit", "type": "uint256" },
-      { "internalType": "uint256", "name": "maxDeposit", "type": "uint256" },
-      { "internalType": "uint256", "name": "dailyROI", "type": "uint256" },
-      { "internalType": "uint256", "name": "duration", "type": "uint256" },
-      { "internalType": "uint256", "name": "totalReturn", "type": "uint256" }
+      {
+        "internalType": "uint256",
+        "name": "minDeposit",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "maxDeposit",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "dailyROI",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "duration",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "totalReturn",
+        "type": "uint256"
+      }
     ],
     "stateMutability": "view",
     "type": "function"
@@ -320,6 +599,60 @@
         "internalType": "uint256",
         "name": "totalLeadershipBonus_",
         "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "totalPoolDistributed_",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "_user",
+        "type": "address"
+      }
+    ],
+    "name": "getPoolInfo",
+    "outputs": [
+      {
+        "internalType": "bool",
+        "name": "isInPool",
+        "type": "bool"
+      },
+      {
+        "internalType": "uint256",
+        "name": "poolEarningsWithdrawn",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "totalPoolMembers",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "poolWindowOpen",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "poolWindowClose",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "nextDistribution",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "totalDistributed",
+        "type": "uint256"
       }
     ],
     "stateMutability": "view",
@@ -329,33 +662,46 @@
     "inputs": [],
     "name": "getReferralRates",
     "outputs": [
-      { "internalType": "uint256[15]", "name": "", "type": "uint256[15]" }
-    ],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [],
-    "name": "getReferralRequirements",
-    "outputs": [
-      { "internalType": "uint256[15]", "name": "", "type": "uint256[15]" }
+      {
+        "internalType": "uint256[15]",
+        "name": "",
+        "type": "uint256[15]"
+      }
     ],
     "stateMutability": "view",
     "type": "function"
   },
   {
     "inputs": [
-      { "internalType": "address", "name": "_user", "type": "address" },
-      { "internalType": "uint256", "name": "_level", "type": "uint256" }
+      {
+        "internalType": "address",
+        "name": "_user",
+        "type": "address"
+      },
+      {
+        "internalType": "uint256",
+        "name": "_level",
+        "type": "uint256"
+      }
     ],
     "name": "getReferralsCountByLevel",
-    "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
     "stateMutability": "view",
     "type": "function"
   },
   {
     "inputs": [
-      { "internalType": "address", "name": "_user", "type": "address" }
+      {
+        "internalType": "address",
+        "name": "_user",
+        "type": "address"
+      }
     ],
     "name": "getTeamMembers",
     "outputs": [
@@ -385,58 +731,88 @@
   },
   {
     "inputs": [
-      { "internalType": "address", "name": "_user", "type": "address" },
-      { "internalType": "uint256", "name": "_level", "type": "uint256" }
-    ],
-    "name": "getTeamMembersByLevel",
-    "outputs": [
-      { "internalType": "address[]", "name": "", "type": "address[]" }
-    ],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [
-      { "internalType": "address", "name": "_user", "type": "address" }
+      {
+        "internalType": "address",
+        "name": "_user",
+        "type": "address"
+      }
     ],
     "name": "getTeamMembersCount",
-    "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
     "stateMutability": "view",
     "type": "function"
   },
   {
     "inputs": [],
     "name": "getTotalInvest",
-    "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
     "stateMutability": "view",
     "type": "function"
   },
   {
     "inputs": [],
     "name": "getTotalPaidOut",
-    "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
     "stateMutability": "view",
     "type": "function"
   },
   {
     "inputs": [
-      { "internalType": "address", "name": "_user", "type": "address" }
+      {
+        "internalType": "address",
+        "name": "_user",
+        "type": "address"
+      }
     ],
     "name": "getTotalTeamSize",
-    "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
     "stateMutability": "view",
     "type": "function"
   },
   {
     "inputs": [],
     "name": "getTotalUser",
-    "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
     "stateMutability": "view",
     "type": "function"
   },
   {
     "inputs": [
-      { "internalType": "address", "name": "_user", "type": "address" }
+      {
+        "internalType": "address",
+        "name": "_user",
+        "type": "address"
+      }
     ],
     "name": "getUserInfo",
     "outputs": [
@@ -455,7 +831,11 @@
         "name": "activeInvestments",
         "type": "uint256"
       },
-      { "internalType": "uint256", "name": "referralBonus", "type": "uint256" },
+      {
+        "internalType": "uint256",
+        "name": "referralBonus",
+        "type": "uint256"
+      },
       {
         "internalType": "uint256",
         "name": "referralBonusWithdrawn",
@@ -471,16 +851,20 @@
         "name": "leadershipBonusWithdrawn",
         "type": "uint256"
       },
-      { "internalType": "address", "name": "referrer", "type": "address" },
       {
-        "internalType": "uint256[15]",
-        "name": "referralLevels",
-        "type": "uint256[15]"
+        "internalType": "uint256",
+        "name": "poolBonus",
+        "type": "uint256"
       },
       {
-        "internalType": "uint256[3]",
-        "name": "leadershipLevels",
-        "type": "uint256[3]"
+        "internalType": "uint256",
+        "name": "poolBonusWithdrawn",
+        "type": "uint256"
+      },
+      {
+        "internalType": "address",
+        "name": "referrer",
+        "type": "address"
       },
       {
         "internalType": "uint256",
@@ -493,12 +877,24 @@
   },
   {
     "inputs": [
-      { "internalType": "address", "name": "_user", "type": "address" }
+      {
+        "internalType": "address",
+        "name": "_user",
+        "type": "address"
+      }
     ],
     "name": "getUserInvestments",
     "outputs": [
-      { "internalType": "uint256[]", "name": "planIds", "type": "uint256[]" },
-      { "internalType": "uint256[]", "name": "amounts", "type": "uint256[]" },
+      {
+        "internalType": "uint256[]",
+        "name": "planIds",
+        "type": "uint256[]"
+      },
+      {
+        "internalType": "uint256[]",
+        "name": "amounts",
+        "type": "uint256[]"
+      },
       {
         "internalType": "uint256[]",
         "name": "startTimes",
@@ -514,7 +910,11 @@
         "name": "totalClaimeds",
         "type": "uint256[]"
       },
-      { "internalType": "bool[]", "name": "actives", "type": "bool[]" },
+      {
+        "internalType": "bool[]",
+        "name": "actives",
+        "type": "bool[]"
+      },
       {
         "internalType": "uint256[]",
         "name": "pendingRewards",
@@ -525,16 +925,60 @@
     "type": "function"
   },
   {
-    "inputs": [{ "internalType": "address", "name": "", "type": "address" }],
-    "name": "hasActiveDeposit",
-    "outputs": [{ "internalType": "bool", "name": "", "type": "bool" }],
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "_user",
+        "type": "address"
+      }
+    ],
+    "name": "getUserLevels",
+    "outputs": [
+      {
+        "internalType": "uint256[15]",
+        "name": "referralLevels",
+        "type": "uint256[15]"
+      },
+      {
+        "internalType": "uint256[3]",
+        "name": "leadershipLevels",
+        "type": "uint256[3]"
+      }
+    ],
     "stateMutability": "view",
     "type": "function"
   },
   {
     "inputs": [
-      { "internalType": "uint256", "name": "_planId", "type": "uint256" },
-      { "internalType": "address", "name": "_referrer", "type": "address" }
+      {
+        "internalType": "address",
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "name": "hasActiveDeposit",
+    "outputs": [
+      {
+        "internalType": "bool",
+        "name": "",
+        "type": "bool"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "_planId",
+        "type": "uint256"
+      },
+      {
+        "internalType": "address",
+        "name": "_referrer",
+        "type": "address"
+      }
     ],
     "name": "invest",
     "outputs": [],
@@ -542,28 +986,168 @@
     "type": "function"
   },
   {
-    "inputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "name": "isPoolMember",
+    "outputs": [
+      {
+        "internalType": "bool",
+        "name": "",
+        "type": "bool"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "isPoolWindowOpen",
+    "outputs": [
+      {
+        "internalType": "bool",
+        "name": "",
+        "type": "bool"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "lastPoolDistribution",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
     "name": "leadershipRates",
-    "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
     "stateMutability": "view",
     "type": "function"
   },
   {
-    "inputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
     "name": "leadershipRequirements",
-    "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
     "stateMutability": "view",
     "type": "function"
   },
   {
-    "inputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
+    "inputs": [],
+    "name": "networkAddress",
+    "outputs": [
+      {
+        "internalType": "address",
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "networkHasInvested",
+    "outputs": [
+      {
+        "internalType": "bool",
+        "name": "",
+        "type": "bool"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
     "name": "plans",
     "outputs": [
-      { "internalType": "uint256", "name": "minDeposit", "type": "uint256" },
-      { "internalType": "uint256", "name": "maxDeposit", "type": "uint256" },
-      { "internalType": "uint256", "name": "dailyROI", "type": "uint256" },
-      { "internalType": "uint256", "name": "duration", "type": "uint256" },
-      { "internalType": "uint256", "name": "totalReturn", "type": "uint256" }
+      {
+        "internalType": "uint256",
+        "name": "minDeposit",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "maxDeposit",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "dailyROI",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "duration",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "totalReturn",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "name": "poolMembers",
+    "outputs": [
+      {
+        "internalType": "address",
+        "name": "",
+        "type": "address"
+      }
     ],
     "stateMutability": "view",
     "type": "function"
@@ -571,21 +1155,45 @@
   {
     "inputs": [],
     "name": "projectAddress",
-    "outputs": [{ "internalType": "address", "name": "", "type": "address" }],
+    "outputs": [
+      {
+        "internalType": "address",
+        "name": "",
+        "type": "address"
+      }
+    ],
     "stateMutability": "view",
     "type": "function"
   },
   {
-    "inputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
     "name": "referralRates",
-    "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
     "stateMutability": "view",
     "type": "function"
   },
   {
-    "inputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
-    "name": "referralRequirements",
-    "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
+    "inputs": [],
+    "name": "startUNIX",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
     "stateMutability": "view",
     "type": "function"
   },
@@ -599,85 +1207,100 @@
   {
     "inputs": [],
     "name": "totalInvested",
-    "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
     "stateMutability": "view",
     "type": "function"
   },
   {
     "inputs": [],
     "name": "totalInvestors",
-    "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
     "stateMutability": "view",
     "type": "function"
   },
   {
     "inputs": [],
     "name": "totalLeadershipBonus",
-    "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "totalPoolDistributed",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
     "stateMutability": "view",
     "type": "function"
   },
   {
     "inputs": [],
     "name": "totalReferralBonus",
-    "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
     "stateMutability": "view",
     "type": "function"
   },
   {
     "inputs": [],
     "name": "totalWithdrawn",
-    "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
     "stateMutability": "view",
     "type": "function"
   },
   {
     "inputs": [
-      { "internalType": "address", "name": "", "type": "address" },
-      { "internalType": "uint256", "name": "", "type": "uint256" }
+      {
+        "internalType": "address",
+        "name": "",
+        "type": "address"
+      },
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
     ],
     "name": "userReferrals",
-    "outputs": [{ "internalType": "address", "name": "", "type": "address" }],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [{ "internalType": "address", "name": "", "type": "address" }],
-    "name": "users",
     "outputs": [
-      { "internalType": "address", "name": "referrer", "type": "address" },
-      { "internalType": "uint256", "name": "totalInvested", "type": "uint256" },
       {
-        "internalType": "uint256",
-        "name": "totalWithdrawn",
-        "type": "uint256"
-      },
-      { "internalType": "uint256", "name": "referralBonus", "type": "uint256" },
-      {
-        "internalType": "uint256",
-        "name": "referralBonusWithdrawn",
-        "type": "uint256"
-      },
-      {
-        "internalType": "uint256",
-        "name": "leadershipBonus",
-        "type": "uint256"
-      },
-      {
-        "internalType": "uint256",
-        "name": "leadershipBonusWithdrawn",
-        "type": "uint256"
-      },
-      { "internalType": "bool", "name": "registered", "type": "bool" },
-      {
-        "internalType": "uint256",
-        "name": "directReferrals",
-        "type": "uint256"
-      },
-      {
-        "internalType": "uint256",
-        "name": "lastWithdrawTime",
-        "type": "uint256"
+        "internalType": "address",
+        "name": "",
+        "type": "address"
       }
     ],
     "stateMutability": "view",
@@ -704,5 +1327,8 @@
     "stateMutability": "nonpayable",
     "type": "function"
   },
-  { "stateMutability": "payable", "type": "receive" }
+  {
+    "stateMutability": "payable",
+    "type": "receive"
+  }
 ]

@@ -20,6 +20,7 @@ interface InvestmentPlan {
   dailyROI: string;
   duration: string;
   totalReturn: string;
+  claimCooldown: string;
   color: string;
 }
 
@@ -37,9 +38,9 @@ const InvestmentPlans: React.FC = () => {
   const [loading, setLoading] = useState<{ [key: number]: boolean }>({});
   const [toastShown, setToastShown] = useState(false);
   const [plans, setPlans] = useState<InvestmentPlan[]>([
-    { id: 0, name: "Starter Plan", minDeposit: "0.05", maxDeposit: "1",        dailyROI: "6.82%",  duration: "22 Days",      totalReturn: "150%", color: "gold"     },
-    { id: 1, name: "Pro Plan",     minDeposit: "0.82", maxDeposit: "22",       dailyROI: "18.04%", duration: "14 Days",      totalReturn: "150%", color: "platinum" },
-    { id: 2, name: "Elite Plan",   minDeposit: "1",    maxDeposit: "Unlimited", dailyROI: "0.36%",  duration: "420 Days",     totalReturn: "150%", color: "diamond"  },
+    { id: 0, name: "Gold Plan (Plan 1)", minDeposit: "0.02", maxDeposit: "100",       dailyROI: "1.30%", duration: "100 Days", totalReturn: "130%", claimCooldown: "8 Hours", color: "gold"     },
+    { id: 1, name: "Platinum Plan (Plan 2)", minDeposit: "0.1",  maxDeposit: "1000",      dailyROI: "0.90%", duration: "200 Days", totalReturn: "180%", claimCooldown: "8 Hours", color: "platinum" },
+    { id: 2, name: "Diamond Plan (Plan 3)", minDeposit: "1",    maxDeposit: "Unlimited", dailyROI: "0.70%", duration: "300 Days", totalReturn: "210%", claimCooldown: "8 Hours", color: "diamond"  },
   ]);
   const [isLoadingPlans, setIsLoadingPlans] = useState(false);
 
@@ -122,7 +123,7 @@ const InvestmentPlans: React.FC = () => {
 
   useEffect(() => {
     const processPlanData = () => {
-      const planNames = ["Starter Plan", "Pro Plan", "Elite Plan"];
+      const planNames = ["Gold Plan (Plan 1)", "Platinum Plan (Plan 2)", "Diamond Plan (Plan 3)"];
       const planColors = ["gold", "platinum", "diamond"];
       const contractPlans = [plan0Data, plan1Data, plan2Data];
 
@@ -147,6 +148,7 @@ const InvestmentPlans: React.FC = () => {
             dailyROI: `${(Number(dailyROI) / 100).toString()}%`,
             duration: `${duration.toString()} days`,
             totalReturn: `${(Number(totalReturn) / 100).toString()}%`,
+            claimCooldown: "8 Hours",
             color: planColors[index],
           });
         }
@@ -305,6 +307,9 @@ const InvestmentPlans: React.FC = () => {
                 className={`plan-card`}
                 style={{ backgroundColor: cardBgColor }}
               >
+                <h3 style={{ color: textColor, textAlign: "center", marginBottom: "1rem", fontSize: "1.2rem", fontWeight: "bold" }}>
+                  {plan.name}
+                </h3>
                 <div className="input-group">
                   <label
                     htmlFor={`investment-${plan.id}`}

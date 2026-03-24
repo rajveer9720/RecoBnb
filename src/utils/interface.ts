@@ -15,6 +15,9 @@ export interface UserDataType {
   referralBonusWithdrawn: string;
   leadershipBonus: string;
   leadershipBonusWithdrawn: string;
+  poolBonus: string;
+  poolBonusWithdrawn: string;
+  isInPool: boolean;
   referrer: string;
   referralLevels: string[];
   leadershipLevels: string[];

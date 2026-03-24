@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import { Navbar, Nav, Container, Button } from "react-bootstrap";
 import ConnectButtons from "../walletConnect";
- const buttonBgColor = import.meta.env.VITE_APP_BUTTON_BG_COLOR || "";
-  const buttonTextColor = import.meta.env.VITE_APP_BUTTON_TEXT_COLOR || ""
+import logoDefault from "../../assets/logo.svg";
+const buttonBgColor = import.meta.env.VITE_APP_BUTTON_BG_COLOR || "";
+const buttonTextColor = import.meta.env.VITE_APP_BUTTON_TEXT_COLOR || "";
 
 const Navigation: React.FC = () => {
   const [expanded, setExpanded] = useState(false);
@@ -13,7 +14,7 @@ const Navigation: React.FC = () => {
     "Leadership",
     "FAQ",
   ];
-  const logoUrl = import.meta.env.VITE_APP_LOGO || "";
+  const logoUrl = import.meta.env.VITE_APP_LOGO || logoDefault;
   const navBgColor = import.meta.env.VITE_APP_NAV_BG_COLOR || "";
   const navTextColor = import.meta.env.VITE_APP_NAV_TEXT_COLOR || "";
 
@@ -52,6 +53,7 @@ const Navigation: React.FC = () => {
                 {item}
               </Nav.Link>
             ))}
+
           </Nav>
 
           <div className="d-flex flex-row flex-wrap align-items-center ms-auto gap-2">
