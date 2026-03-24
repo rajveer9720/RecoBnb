@@ -29,6 +29,20 @@ const Dashboard: React.FC = () => {
     args: [address],
   });
 
+  const [now, setNow] = useState(Math.floor(Date.now() / 1000));
+  useEffect(() => {
+    const id = setInterval(() => setNow(Math.floor(Date.now() / 1000)), 1000);
+    return () => clearInterval(id);
+  }, []);
+
+  const nextWithdrawTimestamp = Number(nextWithdrawTime ?? 0);
+  const isOnCooldown = nextWithdrawTimestamp > now;
+  const remainingSeconds = isOnCooldown ? nextWithdrawTimestamp - now : 0;
+  const rHours = Math.floor(remainingSeconds / 3600);
+  const rMins = Math.floor((remainingSeconds % 3600) / 60);
+  const rSecs = remainingSeconds % 60;
+  const countdownStr = `${String(rHours).padStart(2, "0")}h ${String(rMins).padStart(2, "0")}m ${String(rSecs).padStart(2, "0")}s`;
+
   const [loading, setLoading] = useState({
     roi: false,
     leadership: false,
@@ -69,29 +83,12 @@ const Dashboard: React.FC = () => {
   }, [error]);
 
   const checkCooldown = (): boolean => {
-    if (!nextWithdrawTime) return true;
-
-    const currentTime = Math.floor(Date.now() / 1000);
-    const withdrawTime = Number(nextWithdrawTime);
-
-    if (currentTime < withdrawTime) {
-      const remainingTime = withdrawTime - currentTime;
-      const hours = Math.floor(remainingTime / 3600);
-      const minutes = Math.floor((remainingTime % 3600) / 60);
-
-      let timeMessage = "";
-      if (hours > 0) {
-        timeMessage = `${hours} hour(s) and ${minutes} minute(s)`;
-      } else {
-        timeMessage = `${minutes} minute(s)`;
-      }
-
+    if (isOnCooldown) {
       showFailedAlert(
-        `Claim cooldown not met. Please wait ${timeMessage} before next withdrawal.`,
+        `Cooldown active. Please wait ${countdownStr} before next withdrawal.`,
       );
       return false;
     }
-
     return true;
   };
 
@@ -237,54 +234,80 @@ const Dashboard: React.FC = () => {
               </div>
             </div>
 
+            {/* Cooldown countdown banner */}
+            {isConnected && isOnCooldown && (
+              <div
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  gap: "0.5rem",
+                  backgroundColor: "rgba(239,68,68,0.12)",
+                  border: "1px solid rgba(239,68,68,0.35)",
+                  borderRadius: "8px",
+                  padding: "0.55rem 1rem",
+                  marginBottom: "0.75rem",
+                  fontSize: "0.85rem",
+                  color: "#f87171",
+                  fontWeight: 600,
+                  letterSpacing: "0.02em",
+                }}
+              >
+                <span style={{ fontSize: "1rem" }}>⏳</span>
+                Cooldown active — next withdrawal in&nbsp;
+                <span style={{ fontVariantNumeric: "tabular-nums", minWidth: "90px", display: "inline-block" }}>
+                  {countdownStr}
+                </span>
+              </div>
+            )}
+
             <div className="dashboard-actions">
               {isConnected ? (
                 <>
                   <button
                     className="action-btn secondary-btn"
                     onClick={handleWithdrawROI}
-                    disabled={loading.roi || isConfirming || !userData}
+                    disabled={loading.roi || isConfirming || !userData || isOnCooldown}
                     style={{
                       backgroundColor: buttonBgColor,
                       color: buttonTextColor,
-                      opacity: loading.roi || isConfirming || !userData ? 0.7 : 1,
+                      opacity: loading.roi || isConfirming || !userData || isOnCooldown ? 0.7 : 1,
                       cursor:
-                        loading.roi || isConfirming || !userData ? "not-allowed" : "pointer",
+                        loading.roi || isConfirming || !userData || isOnCooldown ? "not-allowed" : "pointer",
                     }}
                   >
-                    Withdraw ROI
+                    {loading.roi ? "Processing…" : "Withdraw ROI"}
                   </button>
                   <button
                     className="action-btn secondary-btn"
                     onClick={handleWithdrawLeadership}
-                    disabled={loading.leadership || isConfirming || !userData}
+                    disabled={loading.leadership || isConfirming || !userData || isOnCooldown}
                     style={{
                       backgroundColor: buttonBgColor,
                       color: buttonTextColor,
-                      opacity: loading.leadership || isConfirming || !userData ? 0.7 : 1,
+                      opacity: loading.leadership || isConfirming || !userData || isOnCooldown ? 0.7 : 1,
                       cursor:
-                        loading.leadership || isConfirming || !userData
+                        loading.leadership || isConfirming || !userData || isOnCooldown
                           ? "not-allowed"
                           : "pointer",
                     }}
                   >
-                    Withdraw Leadership
+                    {loading.leadership ? "Processing…" : "Withdraw Leadership"}
                   </button>
                   <button
                     className="action-btn secondary-btn"
                     onClick={handleWithdrawReferral}
-                    disabled={loading.referral || isConfirming || !userData}
+                    disabled={loading.referral || isConfirming || !userData || isOnCooldown}
                     style={{
                       backgroundColor: buttonBgColor,
                       color: buttonTextColor,
-                      opacity: loading.referral || isConfirming || !userData ? 0.7 : 1,
+                      opacity: loading.referral || isConfirming || !userData || isOnCooldown ? 0.7 : 1,
                       cursor:
-                        loading.referral || isConfirming || !userData
+                        loading.referral || isConfirming || !userData || isOnCooldown
                           ? "not-allowed"
                           : "pointer",
                     }}
                   >
-                    Withdraw Referral
+                    {loading.referral ? "Processing…" : "Withdraw Referral"}
                   </button>
                 </>
               ) : (

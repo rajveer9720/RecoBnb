@@ -18,52 +18,48 @@ import { useAccount } from "wagmi";
 import { Toaster } from "react-hot-toast";
 
 function AppContent() {
-  const { address, isConnected } = useAccount();
+  const { address } = useAccount();
 
   const backgroundColor =
     import.meta.env.VITE_APP_BACKGROUND_COLOR || "#1e293b";
   document.body.style.backgroundColor = backgroundColor;
 
-  const content = (
-    <div className="app">
-      <Navigation />
+  return (
+    <UserDataProvider userAddress={address ?? ""}>
+      <div className="app">
+        <Navigation />
 
-      <main className="main-content">
-        <section id="home">
-          <Hero />
-        </section>
+        <main className="main-content">
+          <section id="home">
+            <Hero />
+          </section>
 
-        <section id="invest">
-          <InvestmentPlans />
-        </section>
+          <section id="invest">
+            <InvestmentPlans />
+          </section>
 
-        <section id="dashboard">
-          <Dashboard />
-        </section>
+          <section id="dashboard">
+            <Dashboard />
+          </section>
 
-        <section id="leadership">
-          <LeadershipProgram />
-        </section>
+          <section id="leadership">
+            <LeadershipProgram />
+          </section>
 
-        <section id="referrals">
-          <ReferralProgram />
-        </section>
+          <section id="referrals">
+            <ReferralProgram />
+          </section>
 
-        <section id="faq">
-          <FAQ />
-        </section>
-      </main>
+          <section id="faq">
+            <FAQ />
+          </section>
+        </main>
 
-      <Footer />
-      <Toaster />
-    </div>
+        <Footer />
+        <Toaster />
+      </div>
+    </UserDataProvider>
   );
-
-  if (isConnected && address) {
-    return <UserDataProvider userAddress={address}>{content}</UserDataProvider>;
-  }
-
-  return content;
 }
 
 function App() {

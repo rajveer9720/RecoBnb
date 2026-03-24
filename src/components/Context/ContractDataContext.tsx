@@ -79,6 +79,10 @@ export const UserDataProvider: React.FC<{
   const [error, setError] = useState<string | null>(null);
 
   const loadUserData = async () => {
+    if (!userAddress) {
+      setLoading(false);
+      return;
+    }
     setLoading(true);
     try {
       const data = await fetchUserData(userAddress);
